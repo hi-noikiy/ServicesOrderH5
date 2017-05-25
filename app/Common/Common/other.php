@@ -276,7 +276,7 @@ function alidayu($phone,$param,$signName='大鱼测试',$TemplateCode='SMS_68400
 }
 //发送post或get请求
 function sendData($url,$data='',$method='POST',$header=false){
-	$data = http_build_query($data);
+	//$data = http_build_query($data);
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, $url);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);

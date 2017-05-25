@@ -7,8 +7,6 @@ class CarController extends CommonController {
 		if((int)$RE['code']==200){
 			$info = json_decode($RE['data'],true);
 			$info = $info['data'][0];
-			print_r($info);
-			exit();
 			$this->assign('info',$info);
 		}else{
 			$this->error('与服务器连接失败，请稍后再试。');
@@ -18,7 +16,22 @@ class CarController extends CommonController {
 		$this->display();
     }
 	public function selectcarclassAction(){
-		
+		$id = I('get.id');
+		if((int)$id==0){
+			set404();
+		}
+		$this->apipostdata['carSeriesID'] = $id;
+		$data = json_encode($this->apipostdata);
+		$RE = sendData(C('API_SERVER').'GetCarModelDataList',$data,'POST',array('Content-Type: application/json'));
+		if((int)$RE['code']==200){
+			$info = json_decode($RE['data'],true);
+			$list = $info['data'];
+/*			print_r($list);
+			exit;*/
+			$this->assign('list',$list);
+		}else{
+			$this->error('与服务器连接失败，请稍后再试。');
+		}
 		$assign['title']='选择车系';
 		$this->assign('assign',$assign);
 		$this->display();

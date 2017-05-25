@@ -4,35 +4,49 @@
 <head>
 	<include file="./app/Home/View/Include_head.php"/>
 	<style>
-
+		.mui-content>.mui-table-view:first-child {
+			margin-top: 0;
+		}
 	</style>
 </head>
 
 <body>
 	<div class="mui-content">
+		<div class="mui-table-view  mui-grid-view">
+			<div class="mui-table-view-cell" style="text-align: left">
+				<img src="__PUBLIC__/assets/images/page1-als.jpg" alt="" height="50">
+			</div>
+			<div class="mui-table-view-cell " style="text-align: left">ewewrDDSD</div>
+		</div>
 		<ul class="mui-table-view">
 			<li class="mui-table-view-cell mui-collapse">
 				<a class="mui-navigate-right" href="#">2017款</a>
 				<div class="mui-collapse-content">
-					<form class="mui-input-group">
-						<div class="mui-input-row">
-							<label>Input</label>
-							<input type="text" placeholder="普通输入框">
-						</div>
-						<div class="mui-input-row">
-							<label>Input</label>
-							<input type="text" class="mui-input-clear" placeholder="带清除按钮的输入框">
-						</div>
-
-						<div class="mui-input-row mui-plus-visible">
-							<label>Input</label>
-							<input type="text" class="mui-input-speech mui-input-clear" placeholder="语音输入">
-						</div>
-						<div class="mui-button-row">
-							<button class="mui-btn mui-btn-primary" type="button" onclick="return false;">确认</button>&nbsp;&nbsp;
-							<button class="mui-btn mui-btn-primary" type="button" onclick="return false;">取消</button>
-						</div>
-					</form>
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">Item 1</li>
+						<li class="mui-table-view-cell">Item 2</li>
+						<li class="mui-table-view-cell">Item 3</li>
+					</ul>
+				</div>
+			</li>
+			<li class="mui-table-view-cell mui-collapse">
+				<a class="mui-navigate-right" href="#">2016款</a>
+				<div class="mui-collapse-content">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">Item 1</li>
+						<li class="mui-table-view-cell">Item 2</li>
+						<li class="mui-table-view-cell">Item 3</li>
+					</ul>
+				</div>
+			</li>
+			<li class="mui-table-view-cell mui-collapse">
+				<a class="mui-navigate-right" href="#">2015款</a>
+				<div class="mui-collapse-content">
+					<ul class="mui-table-view">
+						<li class="mui-table-view-cell">Item 1</li>
+						<li class="mui-table-view-cell">Item 2</li>
+						<li class="mui-table-view-cell">Item 3</li>
+					</ul>
 				</div>
 			</li>
 		</ul>

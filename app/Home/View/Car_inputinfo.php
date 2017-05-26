@@ -32,23 +32,26 @@
 						 购车时间
 						 <span class="show-data"></span>
 				</a>
+			
 			</li>
-			<li class="mui-table-view-cell">
-				<div class="mui-input-row">
+			<li class="mui-table-view-cell" style="padding:0">
+				<div class="mui-input-row" style="padding-right:50px">
 					<label>行驶里程</label>
-					<input type="text" placeholder="普通输入框">
+					<input type="number" placeholder="请输入公里数" style="text-align:right">
 				</div>
+				<span class="mui-badge mui-badge-inverted">万公里</span>
 			</li>
 			<li class="mui-table-view-cell">
 				<a class="mui-navigate-right" id="showUserPicker">
 						城市
-						<span class="show-data" id="userResult"></span>
+						<span class="show-data" id="userResult" data-value=""></span>
 				</a>
-			
-
 			</li>
 		</ul>
-		<div id='result' class="ui-alert"></div>
+			<nav class="mui-bar mui-bar-tab" style="background-color:#D71F22;border: none; ">
+				<a href="" class="mui-tab-item" style="color:#fff;">查看保养方案</a>
+		</nav>
+	
 	</div>
 	<include file="./app/Home/View/Include_foot.php"/>
 	<script src="__PUBLIC__/assets/js/mui.picker.min.js"></script>

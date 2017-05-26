@@ -36,6 +36,7 @@
 		}
 		roduct-list-detail ul li{
 			float:right;
+			height: 40px;
 		}
 	</style>
 </head>

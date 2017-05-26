@@ -14,9 +14,9 @@
 	<div class="mui-content">
 		<div class="mui-table-view  mui-grid-view">
 			<div class="mui-table-view-cell" style="text-align: left">
-				<img src="__PUBLIC__/assets/images/page1-als.jpg" alt="" height="50">
+				<img src="__PUBLIC__/assets/images/none-car.jpg" alt="" height="50" id="carimg">
 			</div>
-			<div class="mui-table-view-cell " style="text-align: left">ewewrDDSD</div>
+			<div class="mui-table-view-cell " style="text-align: left" id="carname">加载中...</div>
 		</div>
 		<ul class="mui-table-view">
 			<?php
@@ -40,6 +40,14 @@
 		</ul>
 	</div>
 	<include file="./app/Home/View/Include_foot.php"/>
+	<script>
+		var data = decodeURIComponent(_GETDATA('CARINFO'));//解码
+		data = eval('('+data+')');//字符串转换为json对象
+		jQuery('#carname').html(data.carSeriesName);
+		if(data.carSeriesImg!=undefined && data.carSeriesImg!=null && data.carSeriesImg!=""){
+			jQuery('#carimg').attr('src',data.carSeriesImg);
+		}
+	</script>
 </body>
 
 </html>

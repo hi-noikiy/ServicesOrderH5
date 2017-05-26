@@ -25,17 +25,35 @@
 		.mui-btn-danger {
 			margin-left: 50px;
 		}
+		
 		.mui-input-group .mui-input-row {
-    		height:70px; 
+			height: 70px;
 		}
-		.roduct-list-detail{
+		/*.product-list-detail{
 			margin-left:70px;
-		}
-		.roduct-list-detail ul{
 			overflow:hidden;
+			list-style: none
 		}
-		roduct-list-detail ul li{
+		
+		.product-list-detail li{
+			float:left;
+			height: 50px;
+		}
+		.product-list-detail li img{
+			height:100%;
+			
+		}
+		.product-list-detail li:last-child{
 			float:right;
+		}
+		.mui-radio input[type=radio]{
+			top:20px;
+		}*/
+		.product-list-detail{
+			margin-left:30px;
+		}
+		.product-list-detail li{
+			border:none;
 		}
 	</style>
 </head>
@@ -58,6 +76,7 @@
 						</div>
 					</a>
 			
+
 			</li>
 		</ul>
 		<div class="title">
@@ -66,11 +85,12 @@
 					选机油
 				</button>
 		
+
 		</div>
 		<div class="mui-table-view">
 			<form class="mui-input-group">
-				<div class="mui-input-row mui-radio mui-left" >
-					<ul class="product-list-detail">
+				<div class="mui-input-row mui-radio mui-left">
+					<!--<ul class="product-list-detail">
 						<li>
 							<img  src="__PUBLIC__/assets/images/page1-als.jpg">
 						</li>
@@ -79,6 +99,21 @@
 						</li>
 						<li>
 							￥400
+						</li>
+					</ul>-->
+					<ul class="mui-table-view product-list-detail">
+						<li class="mui-table-view-cell mui-media">
+					
+								<img class="mui-media-object mui-pull-left" src="__PUBLIC__/assets/images/page1-als.jpg">
+								<div class="mui-media-body">
+									<div>
+										<p class='mui-ellipsis'>2015款1.6THP自动型</p>
+									</div>
+									<div>
+										<p class='mui-ellipsis'>当前里程</p>
+									</div>
+								</div>
+	
 						</li>
 					</ul>
 					<input name="radio1" type="radio">

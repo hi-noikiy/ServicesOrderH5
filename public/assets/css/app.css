@@ -1,18 +1,8 @@
-html {
-	background-color: #FFFFFF;
-	height: 100%;
-	padding: 0px;
-	margin: 0px;
-}
-html,body {
-	max-width: 640px;
-	min-height: 100%;
-	margin-top: 0px;
-	display: block;
-	position: relative;
-}
 .title{
 	margin: 20px 15px 7px;
 	color: #6d6d72;
 	font-size: 15px;
+}
+.mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before {
+	color: #D50225;
 }

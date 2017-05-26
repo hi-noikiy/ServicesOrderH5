@@ -67,4 +67,9 @@ class CarController extends CommonController {
 		$this->assign('assign',$assign);
 		$this->display();
 	}
+	public function selectorderAction(){
+		$assign['title']='4s店选择';
+		$this->assign('assign',$assign);
+		$this->display();
+	}
 }

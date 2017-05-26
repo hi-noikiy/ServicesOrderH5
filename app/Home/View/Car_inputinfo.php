@@ -48,7 +48,7 @@
 				</a>
 			</li>
 		</ul>
-		<a href="<?php echo U('home/car/selectproduct') ?>" onClick="return isSubmit();" style="color: #FFFFFF;position: fixed;z-index: 10;line-height: 50px;text-align: center;width: 100%;bottom: 0px;left: 0px;background-color: #CE0104;max-width: 640px;">查看保养方案</a>
+		<a href="<?php echo U('home/car/selectproduct') ?>" onClick="return isSubmit();" style="color: #FFFFFF;position: fixed;z-index: 10;line-height: 50px;text-align: center;width: 100%;bottom: 0px;left: 0px;background-color: #CE0104;">查看保养方案</a>
 	
 	</div>
 	<include file="./app/Home/View/Include_foot.php"/>
@@ -78,6 +78,7 @@
 			picker.show(function (selectItems) {
 				jQuery('#selectcityshow').text(selectItems[0].text);
 				_SAVEDATA('selectcity',selectItems[0].value);//保存进本地存储
+				_SAVEDATA('selectcityname',selectItems[0].text);//保存进本地存储
 				//console.log(selectItems[0].text);//智子
 				//console.log(selectItems[0].value);//zz 
 			})
@@ -85,6 +86,7 @@
 		jQuery('#licheng').blur(function(){
 			_SAVEDATA('licheng',jQuery('#licheng').val());//保存进本地存储
 		});
+		
 		function isSubmit(){
 			if(jQuery('#buydateshow').text()==''){
 				mui.alert('请填写购车日期');
@@ -99,6 +101,13 @@
 				return false;
 			}
 			return true;
+		}
+		
+		var data = _GETDATA('buydate');//解码
+		if(data!=undefined && data!=null && data!=""){
+			jQuery('#buydateshow').text(_GETDATA('buydate'));
+			jQuery('#licheng').val(_GETDATA('licheng'));
+			jQuery('#selectcityshow').text(_GETDATA('selectcityname'));
 		}
 	</script>
 </body>

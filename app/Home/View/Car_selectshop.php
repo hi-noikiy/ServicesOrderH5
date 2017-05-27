@@ -117,8 +117,10 @@
 				$(".time-box").click(function(){
 					$(".selected-time").removeClass("selected-time");
 					$(this).addClass("selected-time");
-				})
-				printtimeOn(new Date)
+				});
+				var nextdate=new Date();
+				nextdate.setDate(nextdate.getDate()+1);
+				printtimeOn(nextdate);
 				document.getElementById("select-time").onclick=selecttime;
 				function selecttime(){
 					var dtpicker = new mui.DtPicker( {
@@ -128,6 +130,7 @@
 					} )
 				
 				dtpicker.show( function ( obj ) {
+					$(".selected-time").removeClass("selected-time");
 					var olddate= obj.text;
 					var date=new Date(olddate);
 					printtimeOn(date)
@@ -179,7 +182,6 @@
 					}
 					arr[0]=str1;
 					arr[1]=str2;
-					console.log(arr);
 					return arr;
 				}
 			</script>

@@ -77,4 +77,9 @@ class CarController extends CommonController {
 		$this->assign('assign',$assign);
 		$this->display();
 	}
+	public function verifyorderAction(){
+		$assign['title']='确认订单';
+		$this->assign('assign',$assign);
+		$this->display();
+	}
 }

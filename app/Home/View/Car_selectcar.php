@@ -26,7 +26,7 @@
 				foreach($info['carSeriesList'] as $v){
 		?>
 			<li class="mui-table-view-cell mui-media mui-col-xs-4">
-	           <a href="<?php echo U('Car/selectcarclass?id='.$v['carSeriesCode']); ?>" onClick="return saveinfo('<?php echo urlencode(json_encode($v)); ?>')">
+	           <a href="<?php echo U('Car/selectcarclass?id='.$v['carSeriesCode']); ?>" onClick="return saveinfo('{$v['carSeriesCode']}','{$v['carSeriesImg']}','{$v['carSeriesName']}')">
 		           <img src="<?php if($v['carSeriesImg']==''){ ?>__PUBLIC__/assets/images/none-car.jpg<?php }else{ ?>{$v['carSeriesImg']}<?php } ?>" alt="">
 		           <div class="mui-media-body">{$v['carSeriesName']}</div>
 		       </a>
@@ -39,8 +39,10 @@
 	</div>
 	<include file="./app/Home/View/Include_foot.php"/>
 	<script>
-		function saveinfo(data){
-			_SAVEDATA('CARINFO',data);
+		function saveinfo(carSeriesCode,carSeriesImg,carSeriesName){
+			_SAVEDATA('carSeriesCode',carSeriesCode);
+			_SAVEDATA('carSeriesImg',carSeriesImg);
+			_SAVEDATA('carSeriesName',carSeriesName);
 			return true;
 		}
 	</script>

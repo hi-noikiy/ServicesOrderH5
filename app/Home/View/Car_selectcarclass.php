@@ -28,7 +28,7 @@
 				<?php if($v['carModelList']){ ?>
 					<ul class="mui-table-view mui-table-view-chevron">
 					<?php foreach($v['carModelList'] as $rs){ ?>
-						<li class="mui-table-view-cell"><a class="mui-navigate-right" href="<?php echo U('Car/inputinfo?id='.$rs['carModelCode']); ?>">{$rs['carModelName']}</a></li>
+						<li class="mui-table-view-cell"><a class="mui-navigate-right" href="<?php echo U('Car/inputinfo?id='.$rs['carModelCode']); ?>" onClick="return saveinfo('{$rs['carModelCode']}','{$rs['carModelName']}')">{$rs['carModelName']}</a></li>
 					<?php } ?>
 					</ul>
 				<?php } ?>
@@ -41,11 +41,18 @@
 	</div>
 	<include file="./app/Home/View/Include_foot.php"/>
 	<script>
-		var data = decodeURIComponent(_GETDATA('CARINFO'));//解码
-		data = eval('('+data+')');//字符串转换为json对象
-		jQuery('#carname').html(data.carSeriesName);
-		if(data.carSeriesImg!=undefined && data.carSeriesImg!=null && data.carSeriesImg!=""){
-			jQuery('#carimg').attr('src',data.carSeriesImg);
+		var carSeriesCode = _GETDATA('carSeriesCode');
+		var carSeriesImg = _GETDATA('carSeriesImg');
+		var carSeriesName = _GETDATA('carSeriesName');
+		jQuery('#carname').html(carSeriesName);
+		if(carSeriesImg!=""){
+			jQuery('#carimg').attr('src',carSeriesImg);
+		}
+		
+		function saveinfo(carModelCode,carModelName){
+			_SAVEDATA('carModelCode',carModelCode);
+			_SAVEDATA('carModelName',carModelName);
+			return true;
 		}
 	</script>
 </body>

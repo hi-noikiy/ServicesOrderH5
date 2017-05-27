@@ -1,6 +1,7 @@
 <?php
 namespace Home\Controller;
 class CarController extends CommonController {
+	//选择车系
     public function selectcarAction(){
 		$data = json_encode($this->apipostdata);
 		$RE = sendData(C('API_SERVER').'GetCarBrandSeriesList',$data,'POST',array('Content-Type: application/json'));
@@ -11,10 +12,11 @@ class CarController extends CommonController {
 		}else{
 			$this->error('与服务器连接失败，请稍后再试。');
 		}
-		$assign['title']='选择车型';
+		$assign['title']='选择车系';
 		$this->assign('assign',$assign);
 		$this->display();
     }
+	//选择车型
 	public function selectcarclassAction(){
 		$id = I('get.id');
 		if((int)$id==0){
@@ -32,10 +34,11 @@ class CarController extends CommonController {
 		}else{
 			$this->error('与服务器连接失败，请稍后再试。');
 		}
-		$assign['title']='选择车系';
+		$assign['title']='选择车型';
 		$this->assign('assign',$assign);
 		$this->display();
     }
+	//填写车辆信息
 	public function inputinfoAction(){
 		$id = I('get.id');
 		if((int)$id==0){
@@ -57,7 +60,20 @@ class CarController extends CommonController {
 		$this->assign('assign',$assign);
 		$this->display();
     }
+	//智能保养方案
 	public function selectproductAction(){
+		//$this->apipostdata['carSeriesID'] = $id;
+		$data = json_encode($this->apipostdata);
+		$RE = sendData(C('API_SERVER').'GetProductList',$data,'POST',array('Content-Type: application/json'));
+		if((int)$RE['code']==200){
+			$info = json_decode($RE['data'],true);
+			$list = $info['data'];
+/*			print_r($list);
+			exit;*/
+			$this->assign('list',$list);
+		}else{
+			$this->error('与服务器连接失败，请稍后再试。');
+		}
 		$assign['title']='智能保养方案';
 		$this->assign('assign',$assign);
 		$this->display();

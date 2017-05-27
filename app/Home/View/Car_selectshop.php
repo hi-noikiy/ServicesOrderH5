@@ -118,10 +118,12 @@
 					$(".selected-time").removeClass("selected-time");
 					$(this).addClass("selected-time");
 				});
+				
 				var nextdate=new Date();
 				nextdate.setDate(nextdate.getDate()+1);
 				printtimeOn(nextdate);
 				document.getElementById("select-time").onclick=selecttime;
+				
 				function selecttime(){
 					var dtpicker = new mui.DtPicker( {
 						type: "date", //设置日历初始视图模式 
@@ -129,13 +131,13 @@
 						endDate: new Date( 2016, 04, 25 ) //设置结束日期 
 					} )
 				
-				dtpicker.show( function ( obj ) {
-					$(".selected-time").removeClass("selected-time");
-					var olddate= obj.text;
-					var date=new Date(olddate);
-					printtimeOn(date)
-					
-				} )
+					dtpicker.show( function ( obj ) {
+						$(".selected-time").removeClass("selected-time");
+						var olddate= obj.text;
+						var date=new Date(olddate);
+						printtimeOn(date)
+
+					})ngc
 				}
 				function printtimeOn(date){
 					date.setDate(date.getDate());

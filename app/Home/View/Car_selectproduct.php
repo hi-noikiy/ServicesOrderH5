@@ -28,7 +28,7 @@
 	<div style="position: fixed;z-index: 10;height: 50px; line-height: 50px;width: 100%;bottom: 0px;left: 0px;background-color: #FFFFFF;overflow: hidden;" class="mui-row">
 		<div class="mui-col-xs-8" style="padding-left: 10px;font-size: 12px;">合计：￥<span style="font-size: 18px;color: red;" id="sumPrice">0</span>
 		</div>
-		<div class="mui-col-xs-4"><a href="<?php echo U('home/car/selectshop') ?>" onClick="return isSubmit();" style="display: block;color: #FFFFFF;text-align: center;background-color: #D50225;max-width: 640px;">下一步</a>
+		<div class="mui-col-xs-4"><a href="<?php echo U('home/car/selectshop') ?>" id="gourl" onClick="return isSubmit();" style="display: block;color: #FFFFFF;text-align: center;background-color: #D50225;max-width: 640px;">下一步</a>
 		</div>
 	</div>
 	<div class="mui-content" style="padding-bottom: 50px;">
@@ -64,7 +64,7 @@
 				foreach ( $rs3 as $rs4 ) {
 					?>
 			<li class="mui-table-view-cell mui-checkbox mui-left mui-media" style="line-height: 42px;">
-				<input id="ckb{$rs4['productID']}" type="checkbox" mydata-id="{$rs4['productID']}" mydata-name="{$rs4['productName']}" mydata-price="{$rs4['salePrice']}" mydata-img="{$rs4['imgSrc']}"><img class="mui-media-object mui-pull-left" src="<?php if($rs4['imgSrc']==''){ ?>__PUBLIC__/assets/images/none-car.jpg<?php }else{ ?>{$rs4['imgSrc']}<?php } ?>" width="42" height="42">{$rs4['productName']}<span class="mui-badge mui-badge-danger mui-badge-inverted">￥{$rs4['salePrice']}</span>
+				<input id="ckb{$rs4['productID']}" type="checkbox" mydata-id="{$rs4['productID']}" mydata-name="{$rs4['productName']}" mydata-price="{$rs4['salePrice']}" mydata-img="{$rs4['imgSrc']}"><img class="mui-media-object mui-pull-left" src="<?php if($rs4['imgSrc']==''){ ?>__PUBLIC__/assets/images/none-shop.jpg<?php }else{ ?>{$rs4['imgSrc']}<?php } ?>" width="42" height="42">{$rs4['productName']}<span class="mui-badge mui-badge-danger mui-badge-inverted">￥{$rs4['salePrice']}</span>
 			</li>
 			<?php
 			}
@@ -141,6 +141,7 @@
 				mui.alert('请选择保养项目');
 				return false;
 			}
+			jQuery('#gourl').attr('href',jQuery('#gourl').attr('href')+'?cityid='+_GETDATA( 'selectcity' ));
 			return true;
 		}
 	</script>

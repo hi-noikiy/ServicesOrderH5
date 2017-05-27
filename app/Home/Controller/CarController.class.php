@@ -79,11 +79,43 @@ class CarController extends CommonController {
 		$this->display();
 	}
 	public function selectshopAction(){
+		$id = I('get.cityid');
+		if((int)$id==0){
+			set404();
+		}
+		$this->apipostdata['cityID'] = $id;
+		$data = json_encode($this->apipostdata);
+		$RE = sendData(C('API_SERVER').'GetSubList',$data,'POST',array('Content-Type: application/json'));
+		if((int)$RE['code']==200){
+			$info = json_decode($RE['data'],true);
+			$list = $info['data'];
+/*			print_r($list);
+			exit;*/
+			$this->assign('list',$list);
+		}else{
+			$this->error('与服务器连接失败，请稍后再试。');
+		}
 		$assign['title']='4s店选择';
 		$this->assign('assign',$assign);
 		$this->display();
 	}
 	public function selectorderAction(){
+		$id = I('get.subcode');
+		if($id==""){
+			set404();
+		}
+		$this->apipostdata['subCode'] = $id;
+		$data = json_encode($this->apipostdata);
+		$RE = sendData(C('API_SERVER').'GetSubTimeSlotList',$data,'POST',array('Content-Type: application/json'));
+		if((int)$RE['code']==200){
+			$info = json_decode($RE['data'],true);
+			$list = $info['data'];
+/*			print_r($list);
+			exit;*/
+			$this->assign('list',$list);
+		}else{
+			$this->error('与服务器连接失败，请稍后再试。');
+		}
 		$assign['title']='4s店选择';
 		$this->assign('assign',$assign);
 		$this->display();

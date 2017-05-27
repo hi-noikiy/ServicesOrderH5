@@ -11,13 +11,17 @@
 		.mui-row {
 			text-align: center;
 			background: #777;
-			line-height: 30px;
+			line-height: 20px;
+			padding: 5px 0;
 		}
 		ul.mui-row {
 			list-style:none;
 			background: #fff;
 			padding: 15px 0;
 			margin:0;
+		}
+		.mui-col-xs-2{
+			padding:5px 0;
 		}
 		.price{
 			color:#D11F22;
@@ -27,11 +31,12 @@
 		}
 		
 		.mui-row div div {
-			font-size: 14px;
+			font-size: 12px;
 		}
 		
 		.selected-time {
 			background: #B81215;
+			border-radius: 10px;
 		}
 		
 		.mui-table-view .mui-media-object {
@@ -65,7 +70,7 @@
 				<span >03-25</span>
 				<div>（周二）</div>
 			</div>
-			<div class="mui-col-xs-2" id="select-time"><a href="#">
+			<div class="mui-col-xs-2" id="select-time" style="font-size: 10px;line-height: 15px"><a href="#">
 				选择<br>时间
 			</div>
 		</div>

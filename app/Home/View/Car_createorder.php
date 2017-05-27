@@ -112,7 +112,6 @@
 						</div>
 					</div>
         		</a>
-			
 			</li>
 		</ul>
 		<div class="title total-price">

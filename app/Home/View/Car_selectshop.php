@@ -48,7 +48,7 @@
 		var dtPicker = new mui.DtPicker( {
 			type: 'date',
 			beginDate: new Date( <?php echo date('Y',time()); ?>,<?php echo date('m',time()); ?>-1,<?php echo date('d',time()); ?>+1 ),
-			endDate: new Date(<?php echo date('Y',time()+7776000); ?>,<?php echo date('m',time()+7776000); ?>-1,<?php echo date('d',time()+7776000); ?>+1 )
+			endDate: new Date(<?php echo date('Y',time()+2592000); ?>,<?php echo date('m',time()+2592000); ?>-1,<?php echo date('d',time()+2592000); ?>+1 )
 		} );
 		jQuery( '#selectdate' ).click( function () {
 			dtPicker.show( function ( s ) {

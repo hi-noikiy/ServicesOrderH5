@@ -48,62 +48,41 @@
 	<div class="order-bg mui-content">
 		<div class="order-content">
 			<div class="title">
-				<b>某某某</b>
-				<span>先生/女士</span>
+				<b>{$info['orderPersonName']}</b>
+				<span></span>
 			</div>
 			<ul class="mui-table-view">
 				<li class="mui-table-view-cell">
-					<p>车&nbsp;&nbsp;&nbsp;型：东风雪铁龙C3-XR 2015款1.6TH自动型</p>
-					<p>车架号：ldc1234327643</p>
-					<p>电&nbsp;&nbsp;&nbsp;话：<span>1390000000</span></p>
+					<p>车&nbsp;&nbsp;&nbsp;型：{$info['carModelName']}</p>
+					<p>车架号：{$info['orderVin']}</p>
+					<p>电&nbsp;&nbsp;&nbsp;话：<span>{$info['orderPhone']}</span></p>
 				</li>
 			</ul>
 			<div class="title">
-			订单编号：<span>000000344</span>
+			订单编号：<span>{$info['orderNo']}</span>
 		</div>
 		<ul class="mui-table-view">
+		<?php
+			if($info['productList']){
+				foreach($info['productList'] as $v){
+		?>
 			<li class="mui-table-view-cell mui-media">
-				<a href="javascript:;">
-					<img class="mui-media-object mui-pull-left" src="../../../public/assets/images/oil1.jpg">
+					<img class="mui-media-object mui-pull-left" src="<?php if($v['imgSrc']==''){ ?>__PUBLIC__/assets/images/none-car.jpg<?php }else{ ?><?php echo C('IMG_URL'); ?>{$v['imgSrc']}<?php } ?>">
 					<div class="mui-media-body mui-row">
-						<p class="mui-col-xs-8">昆仑润滑油</p>
+						<p class="mui-col-xs-8">{$v['productName']}</p>
 						<div class="mui-col-xs-4" >
-						<p>￥400</p>
-						<p> ×<span>1</span></p>
+						<p>￥{$v['salePrice']}</p>
+						<p> ×<span>{$v['productNum']}</span></p>
 						</div>
 					</div>
-        		</a>
-			
 			</li>
-			<li class="mui-table-view-cell mui-media">
-				<a href="javascript:;">
-					<img class="mui-media-object mui-pull-left" src="../../../public/assets/images/oil1.jpg">
-					<div class="mui-media-body mui-row">
-						<p class="mui-col-xs-8">昆仑润滑油</p>
-						<div class="mui-col-xs-4" >
-						<p>￥400</p>
-						<p> ×<span>1</span></p>
-						</div>
-					</div>
-        		</a>
-			
-			</li>
-			<li class="mui-table-view-cell mui-media">
-				<a href="javascript:;">
-					<img class="mui-media-object mui-pull-left" src="../../../public/assets/images/oil1.jpg">
-					<div class="mui-media-body mui-row">
-						<p class="mui-col-xs-8">昆仑润滑油</p>
-						<div class="mui-col-xs-4" >
-						<p>￥400</p>
-						<p> ×<span>1</span></p>
-						</div>
-					</div>
-        		</a>
-			
-			</li>
+			<?php
+				}
+			}
+			?>
 		</ul>
 		<div class="title total-price">
-			共<span>3</span>件商品 合计：<span>￥1000</span>
+			共<span>3</span>件商品 合计：<span>￥{$info['totalPrice']}</span>
 		</div>
 		</div>
 		<div class="receipt-money mui-row">

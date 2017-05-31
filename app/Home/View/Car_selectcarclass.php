@@ -46,7 +46,7 @@
 		var carSeriesName = _GETDATA('carSeriesName');
 		jQuery('#carname').html(carSeriesName);
 		if(carSeriesImg!=""){
-			jQuery('#carimg').attr('src',carSeriesImg);
+			jQuery('#carimg').attr('src','<?php echo C('IMG_URL'); ?>'+carSeriesImg);
 		}
 		
 		function saveinfo(carModelCode,carModelName){

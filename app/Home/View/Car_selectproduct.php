@@ -64,7 +64,7 @@
 				foreach ( $rs3 as $rs4 ) {
 					?>
 			<li class="mui-table-view-cell mui-checkbox mui-left mui-media" style="line-height: 42px;">
-				<input id="ckb{$rs4['productID']}" type="checkbox" mydata-id="{$rs4['productID']}" mydata-name="{$rs4['productName']}" mydata-price="{$rs4['salePrice']}" mydata-img="{$rs4['imgSrc']}"><img class="mui-media-object mui-pull-left" src="<?php if($rs4['imgSrc']==''){ ?>__PUBLIC__/assets/images/none-shop.jpg<?php }else{ ?>{$rs4['imgSrc']}<?php } ?>" width="42" height="42">{$rs4['productName']}<span class="mui-badge mui-badge-danger mui-badge-inverted">￥{$rs4['salePrice']}</span>
+				<input id="ckb{$rs4['productID']}" type="checkbox" mydata-id="{$rs4['productID']}" mydata-name="{$rs4['productName']}" mydata-price="{$rs4['salePrice']}" mydata-count="1" mydata-img="{$rs4['imgSrc']}"><img class="mui-media-object mui-pull-left" src="<?php if($rs4['imgSrc']==''){ ?>__PUBLIC__/assets/images/none-shop.jpg<?php }else{ ?><?php echo C('IMG_URL'); ?>{$rs4['imgSrc']}<?php } ?>" width="42" height="42">{$rs4['productName']}<span class="mui-badge mui-badge-danger mui-badge-inverted">￥{$rs4['salePrice']}</span>
 			</li>
 			<?php
 			}
@@ -98,7 +98,7 @@
 		jQuery( '#licheng' ).html( licheng );
 		jQuery( '#selectcityname' ).html( selectcityname );
 		if ( carSeriesImg != "" ) {
-			jQuery( '#carimg' ).attr( 'src', carSeriesImg );
+			jQuery( '#carimg' ).attr( 'src', '<?php echo C('IMG_URL'); ?>'+carSeriesImg );
 		}
 
 		//alert( JSON.stringify( cplistjson ) );
@@ -111,9 +111,9 @@
 					productName:jQuery( this ).attr( 'mydata-name' ),
 					salePrice:jQuery( this ).attr( 'mydata-price' ),
 					imgSrc:jQuery( this ).attr( 'mydata-img' ),
-					productNum:'1'
+					productNum:jQuery( this ).attr( 'mydata-count' )
 				});
-				sumPrice += parseFloat(jQuery( this ).attr( 'mydata-price' ));
+				sumPrice += parseFloat(jQuery( this ).attr( 'mydata-price' ))*parseFloat(jQuery( this ).attr( 'mydata-count' ));
 			} );
 			jQuery('#sumPrice').text(sumPrice);
 			_SAVEDATA('productList',JSON.stringify( cplistjson ));
@@ -130,7 +130,7 @@
 			productList = eval('('+productList +')');
 			jQuery.each(productList,function(entryIndex,data){
 				jQuery('#ckb'+data['productID']).prop('checked',true);
-				sumPrice += parseFloat(data['salePrice']);
+				sumPrice += parseFloat(data['salePrice'])*parseFloat(data['productNum']);
 			});
 			jQuery('#sumPrice').text(sumPrice);
 		}

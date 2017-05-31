@@ -27,7 +27,7 @@
 		}
 		
 		.total-price span:last-child {
-			font-size: 16px;
+			font-size: 24px;
 			color: #D32F32;
 		}
 		
@@ -43,8 +43,8 @@
 </head>
 
 <body>
-<a href="/index.php/home/car/selectproduct.html" onClick="return isSubmit();" style="color: #FFFFFF;position: fixed;z-index: 10;line-height: 50px;text-align: center;width: 100%;bottom: 0px;left: 0px;background-color: #CE0104;">查看保养方案</a>
-	<div class="mui-content" style="padding-bottom: 50px;">
+<a href="#" onClick="return isSubmit();" style="color: #FFFFFF;position: fixed;z-index: 10;line-height: 50px;text-align: center;width: 100%;bottom: 0px;left: 0px;background-color: #CE0104;">确认订单</a>
+	<div class="mui-content" style="padding-bottom: 80px;">
 		<div class="title">
 			门店信息
 		</div>
@@ -72,64 +72,26 @@
 		<div class="title">
 			保养项目
 		</div>
-		<ul class="mui-table-view">
+		<ul class="mui-table-view" id="productlist">
 			<li class="mui-table-view-cell mui-media">
-				<a href="javascript:;">
-					<img class="mui-media-object mui-pull-left" src="../../../public/assets/images/oil1.jpg">
-					<div class="mui-media-body mui-row">
-						<p class="mui-col-xs-8">昆仑润滑油</p>
-						<div class="mui-col-xs-4" >
-						<p>￥400</p>
-						<p> ×<span>1</span></p>
-						</div>
-					</div>
-        		</a>
-			
-
-			</li>
-			<li class="mui-table-view-cell mui-media">
-				<a href="javascript:;">
-					<img class="mui-media-object mui-pull-left" src="../../../public/assets/images/oil1.jpg">
-					<div class="mui-media-body mui-row">
-						<p class="mui-col-xs-8">昆仑润滑油</p>
-						<div class="mui-col-xs-4" >
-						<p>￥400</p>
-						<p> ×<span>1</span></p>
-						</div>
-					</div>
-        		</a>
-			
-
-			</li>
-			<li class="mui-table-view-cell mui-media">
-				<a href="javascript:;">
-					<img class="mui-media-object mui-pull-left" src="../../../public/assets/images/oil1.jpg">
-					<div class="mui-media-body mui-row">
-						<p class="mui-col-xs-8">昆仑润滑油</p>
-						<div class="mui-col-xs-4" >
-						<p>￥400</p>
-						<p> ×<span>1</span></p>
-						</div>
-					</div>
-        		</a>
-			
+					数据加载中...
 			</li>
 		</ul>
 		<div class="title total-price">
-			共<span>3</span>件商品 合计：<span>￥1000</span>
+			合计：￥<span id="sumPrice">1000</span>
 		</div>
 		<form class="mui-input-group">
 			<div class="mui-input-row">
 				<label><span>*</span>姓&nbsp;&nbsp;&nbsp;名：</label>
-				<input type="text" class="mui-input-clear" placeholder="请输入真实姓名">
+				<input type="text" class="mui-input-clear" placeholder="请输入真实姓名" id="orderPersonName">
 			</div>
 			<div class="mui-input-row">
 				<label>&nbsp;车架号：</label>
-				<input type="text" class="mui-input-clear" placeholder="请输入正确的车架号">
+				<input type="text" class="mui-input-clear" placeholder="请输入正确的车架号" id="orderVin">
 			</div>
 			<div class="mui-input-row">
 				<label><span>*</span>手机号：</label>
-				<input type="text" class="mui-input-clear" placeholder="请输入本人手机号">
+				<input type="text" class="mui-input-clear" placeholder="请输入您的手机号" id="orderPhone">
 			</div>
 		</form>
 	</div>
@@ -142,6 +104,84 @@
 			jQuery( '#subPhone' ).text( _GETDATA( 'subPhone' ) );
 			jQuery( '#selectdate' ).text( _GETDATA( 'selectdate' ) );
 			jQuery( '#startTime' ).text( _GETDATA( 'startTime' )+' - '+ _GETDATA( 'endTime' ) );
+			jQuery( '#orderPersonName' ).val( _GETDATA( 'orderPersonName' ) );
+			jQuery( '#orderVin' ).val( _GETDATA( 'orderVin' ) );
+			jQuery( '#orderPhone' ).val( _GETDATA( 'orderPhone' ) );
+			var productList = _GETDATA( 'productList' );
+			if(productList!=undefined && productList!=null && productList!="" && productList!="[]"){
+				//alert(productList);
+				productList = eval('('+productList +')');
+				var liststr = '';
+				var imgSrc = '__PUBLIC__/assets/images/none-shop.jpg';
+				var sumPrice=0;
+				jQuery.each(productList,function(entryIndex,data){
+					if(data['imgSrc']!=''){
+						imgSrc = '<?php echo C('IMG_URL'); ?>'+data['imgSrc'];
+					}else{
+						imgSrc = '__PUBLIC__/assets/images/none-shop.jpg';
+					}
+					liststr += '<li class="mui-table-view-cell mui-media">'+
+					'<img class="mui-media-object mui-pull-left" src="'+imgSrc+'">'+
+					'<div class="mui-media-body mui-row">'+
+						'<p class="mui-col-xs-8">'+data['productName']+'</p>'+
+						'<div class="mui-col-xs-4" >'+
+						'<p>￥'+data['salePrice']+'</p>'+
+						'<p> ×<span>'+data['productNum']+'</span></p>'+
+						'</div>'+
+					'</div>'+
+					'</li>';
+					sumPrice += parseFloat(data['salePrice'])*parseFloat(data['productNum']);
+				});
+				jQuery('#productlist').html(liststr);
+				jQuery('#sumPrice').text(sumPrice);
+			}
+		}
+		function isSubmit(){
+			if(jQuery('#orderPersonName').val()==''){
+				mui.alert('请输入您的真实姓名');
+				return false;
+			}
+			if(jQuery('#orderVin').val()==''){
+				mui.alert('请输入正确的车架号');
+				return false;
+			}
+			if(jQuery('#orderPhone').val()==''){
+				mui.alert('请输入您的手机号');
+				return false;
+			}
+			_SAVEDATA('orderPersonName',jQuery('#orderPersonName').val());//保存进本地存储
+			_SAVEDATA('orderVin',jQuery('#orderVin').val());//保存进本地存储
+			_SAVEDATA('orderPhone',jQuery('#orderPhone').val());//保存进本地存储
+			//alert(_GETDATA( 'productList' ));
+			jQuery.ajax({
+				type: "POST",
+				url: "<?php echo U('home/car/createorder'); ?>",
+				global:"false",
+				data:"productList="+_GETDATA( 'productList' )+"&CarModelCode="+_GETDATA( 'carModelCode' )+"&subTimeID="+_GETDATA( 'subTimeID' )+"&subCode="+_GETDATA( 'subCode' )+"&orderPersonName="+jQuery('#orderPersonName').val()+"&orderVin="+jQuery('#orderVin').val()+"&orderPhone="+jQuery('#orderPhone').val(),
+				dataType:"json",
+				error:function(){
+					return false;
+				},
+				success: function(msg){
+					if(msg.status=='1'){
+						
+							mui.alert(msg.info.message);
+						if(msg.info.data == ''){
+							mui.alert(msg.info.message);
+						}else{
+							mui.alert('您的订单已提交成功');
+						}
+					}else if(msg.status=='-1'){
+						mui.alert('与服务器通讯出错');
+					}
+					else if(msg.status=='-2'){
+						mui.alert('提交的信息不符合要求');
+					}
+				},
+				complete:function(){
+				}
+			});
+			return false;
 		}
 		</script>
 </body>

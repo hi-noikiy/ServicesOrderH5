@@ -35,7 +35,7 @@
 			
 			</li>
 			<li class="mui-table-view-cell" style="padding:0">
-				<div class="mui-input-row" style="padding-right:50px">
+				<div class="mui-input-row" style="padding-right:80px">
 					<label>行驶里程</label>
 					<input id="licheng" type="number" placeholder="请输入公里数" style="text-align:right">
 				</div>

@@ -6,5 +6,6 @@ return array(
 	'ACTION_SUFFIX'=>'Action',         // 操作方法后缀
 	'SHOW_PAGE_TRACE'=>  false,             // 显示页面Trace信息	
 	'URL_MODEL'=>  1,               //URL模式
-	'API_SERVER'=>'http://139.224.199.100:8015/webapi/api/CarInfo/'
+	'API_SERVER'=>'http://139.224.199.100:8015/webapi/api/CarInfo/',
+	'IMG_URL'=>'http://139.224.199.100:8015/webapi'
 ); 

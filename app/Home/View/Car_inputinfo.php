@@ -24,7 +24,7 @@
 </head>
 
 <body>
-	<div class="mui-content">
+	<div class="mui-content" style="padding-bottom: 50px;">
 		<div class="title">请完善一下信息便于更精确的为您提供保养套餐</div>
 		<ul class="mui-table-view">
 			<li class="mui-table-view-cell">

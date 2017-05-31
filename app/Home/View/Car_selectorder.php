@@ -19,13 +19,60 @@
 		.timebox .mui-col-xs-4{
 			padding: 10px;
 		}
+		.selected-time {
+			text-align: center;
+			background: #777;
+			line-height: 20px;
+			padding: 5px 0;
+		}
+		.selected-time .mui-col-xs-2{
+			padding:5px 0;
+		}
+		.selected-time div {
+			color: #eee;
+		}
+		
+		.mui-row div div {
+			font-size: 12px;
+		}
+		
+		.selected{
+			background: #B81215;
+			border-radius: 10px;
+		}
 	</style>
 </head>
 
 <body>
 	<div class="mui-content">
-		<div class="mui-row datebox">
+		<!--<div class="mui-row datebox">
 			<div class="mui-col-xs-10" style="padding-left: 10px;">预约日期：<span id="selectdateshow">2017年6月23日</span></div>
+		</div>-->
+		<div class="mui-row selected-time">
+			<div class="mui-col-xs-2 time-box">
+				<span >03-25</span>
+				<div>（周二）</div>
+			</div>
+			<div class="mui-col-xs-2 selected">
+				<span >03-25</span>
+				<div>（周二）</div>
+			</div>
+			<div class="mui-col-xs-2 time-box">
+				<span >03-25</span>
+				<div>（周二）</div>
+			</div>
+			<div class="mui-col-xs-2 time-box">
+				<span >03-25</span>
+				<div>（周二）</div>
+			</div>
+			<div class="mui-col-xs-2 time-box">
+				<span >03-25</span>
+				<div>（周二）</div>
+			</div>
+			<div class="mui-col-xs-2 time-box">
+				<span >03-25</span>
+				<div>（周二）</div>
+			</div>
 		</div>
 		<ul class="mui-table-view">
 			<li class="mui-table-view-cell mui-media">
@@ -59,7 +106,7 @@
 			jQuery( '#subName' ).text( _GETDATA( 'subName' ) );
 			jQuery( '#subAddr' ).text( _GETDATA( 'subAddr' ) );
 			if ( _GETDATA( 'subPicture' ) != '' ) {
-				jQuery( '#subPicture' ).text( _GETDATA( 'subPicture' ) );
+				jQuery( '#subPicture' ).text( "<?php echo C('IMG_URL'); ?>"+_GETDATA( 'subPicture' ) );
 			}
 		}
 		function isSubmit( subTimeID, startTime, endTime, floatPrice ) {

@@ -16,7 +16,7 @@
 			padding: 5px 0;
 		}
 		
-		.mui-row div a {
+		.mui-row div{
 			color: #eee;
 		}
 		
@@ -34,27 +34,32 @@
 <body>
 	<div class="mui-content">
 		<div class="mui-row">
-			<div class="mui-col-xs-2 time-box"><a href="#">
+			<div class="mui-col-xs-2 time-box">
 				<span class="md"></span>
+				<input type="hidden">
 				<div class="week"></div>
 			</div>
-			<div class="mui-col-xs-2 time-box"><a href="#">
+			<div class="mui-col-xs-2 time-box">
 				<span class="md"></span>
+				<input type="hidden">
 				<div class="week"></div>
 			</div>
-			<div class="mui-col-xs-2 time-box"><a href="#">
-				<span class="md">03-25</span>
-				<div class="week"></div>
-			</div>
-			<div class="mui-col-xs-2 time-box"><a href="#">
+			<div class="mui-col-xs-2 time-box">
 				<span class="md"></span>
+				<input type="hidden">
 				<div class="week"></div>
 			</div>
-			<div class="mui-col-xs-2 time-box"><a href="#">
+			<div class="mui-col-xs-2 time-box">
 				<span class="md"></span>
+				<input type="hidden">
 				<div class="week"></div>
 			</div>
-			<div class="mui-col-xs-2" id="select-time" style="font-size: 10px;line-height: 15px"><a href="#">
+			<div class="mui-col-xs-2 time-box">
+				<span class="md"></span>
+				<input type="hidden">
+				<div class="week"></div>
+			</div>
+			<div class="mui-col-xs-2" id="select-time" style="font-size: 10px;line-height: 15px">
 				选择<br>时间
 			</div>
 		</div>
@@ -64,8 +69,8 @@
 				foreach ( $list as $v ) {
 					?>
 			<li class="mui-table-view-cell mui-media">
-				<a href="<?php echo U('home/car/selectorder?subcode='.$v['subCode']); ?>" class="mui-navigate-right" onClick="return isSubmit('{$v['subCode']}','{$v['subName']}','{$v['subAddr']}','{$v['subPicture']}');">
-						<img class="mui-media-object mui-pull-left" src="<?php if($v['subPicture']==''){ ?>__PUBLIC__/assets/images/none-shop.jpg<?php }else{ ?>{$v['subPicture']}<?php } ?>">
+				<a href="<?php echo U('home/car/selectorder?subcode='.$v['subCode']); ?>" class="mui-navigate-right" onClick="return isSubmit('{$v['subCode']}','{$v['subName']}','{$v['subAddr']}','{$v['subPicture']}','{$v['subPhone']}');">
+						<img class="mui-media-object mui-pull-left" src="<?php if($v['subPicture']==''){ ?>__PUBLIC__/assets/images/none-shop.jpg<?php }else{ ?><?php echo C('IMG_URL'); ?>{$v['subPicture']}<?php } ?>">
 						<div class="mui-media-body">
 							{$v['subName']}
 							<p class='mui-ellipsis'>{$v['subAddr']}</p>
@@ -84,46 +89,30 @@
 			<script src="__PUBLIC__/assets/js/mui.picker.min.js"></script>
 			<script>
 				
-				var global_year; /*获取时间年份*/
 				$( ".time-box" ).click( function () {
 					var selectedTime = $( ".selected-time" );
 					if ( selectedTime ) {
 						selectedTime.removeClass( "selected-time" );
 					}
 					$( this ).addClass( "selected-time" );
-					var month = $( this ).find( ".md" ).html();
-					var year;
-					if(global_year){
-						year = global_year;
-					}else{
-						year=new Date();
-						year=year.getFullYear();
-					}
-					savetime( year + "-" + month );
-					
-				} );
-				/*保存 时间*/
-				function savetime(time){
-					var selecteddate = new Date(time);
-					var selectedtime = selecteddate.getFullYear() + "年" + ( selecteddate.getMonth() + 1 ) + "月" + selecteddate.getDate() + "日";
-					_SAVEDATA( 'selectdate',selectedtime )
-				}
-				
+					var date= $( this ).find( "input" ).val();
+					console.log($( this ).find( "input").val())
+					_SAVEDATA('selectdate',date);
+				});
+				//页面加载完执行
 				$(function(){
 				var nextdate;//声明时间
-					var num=0;
-				//如果location里面有时间
 				if(_GETDATA( 'selectdate' )){
-					var str=_GETDATA( 'selectdate' ).replace(/[\u4e00-\u9fa5]/g,"-");
-					str=str.substring(0,str.length-1);
-					nextdate =new Date(str);
+					nextdate = _GETDATA( 'selectdate' )
 				}else{
 					nextdate = new Date();
 					nextdate.setDate( nextdate.getDate() + 1 );
 				}
-				if(checkedEndTime(nextdate)){num=4};
-				printtimeOn( nextdate,num);
+				var num=0;
+					if(checkedEndTime(nextdate)){num=4};
+					printtimeOn( nextdate,num);
 				})
+			
 				 /*验证是否为 最后一天*/
 				function checkedEndTime(nextdate){
 					var endtime=new Date( <?php echo date('Y',time()+2592000); ?>, <?php echo date('m',time()+2592000); ?> - 1, <?php echo date('d',time()+2592000); ?> + 1 );
@@ -147,32 +136,37 @@
 							selectedTime.removeClass( "selected-time" );
 						}
 						var olddate = obj.text;
-						savetime(olddate);//保存时间
-						var date = new Date( olddate );
-						global_year=date.getFullYear();
+						var date = new Date( olddate+" "+"00:00:00" );
+						_SAVEDATA( 'selectdate',date);
 						var num=0;
-						if(checkedEndTime(unifyTime(date))){num=4};
+						if(checkedEndTime(date)){num=4};
 						printtimeOn( date,num)
 
-					} )
+					})
 				}
 				/*时间打印到页面*/
-				function printtimeOn( date,num) {
-					date.setDate( date.getDate() -num);
+				function printtimeOn(date,num) {
+					var date=new Date(date);
+					date.setDate(date.getDate()-num);
 					var md = document.querySelectorAll( ".md" );
 					var timeBox=document.querySelectorAll(".time-box");
-						$(timeBox[num]).addClass("selected-time ");
+						$(timeBox[num]).addClass("selected-time");
 					var week = document.querySelectorAll( ".week" );
 					md[ 0 ].innerHTML = customdate( date )[ 0 ];
+					md[ 0 ].nextSibling.value=date;
+					jQuery('.time-box input').eq(0).val(date);
 					week[ 0 ].innerHTML = customdate( date )[ 1 ];
 					for ( var i = 1; i < 5; i++ ) {
 						date.setDate( date.getDate() + 1 );
 						md[ i ].innerHTML = customdate( date )[ 0 ];
+						jQuery('.time-box input').eq(i).val(date);
+						md[ i ].nextSibling.value=date;
 						week[ i ].innerHTML = customdate( date )[ 1 ];
 					}
 				}
 				/*定制时间格式*/
 				function customdate( date ) {
+					var date=new Date(date);
 					var arr = [];
 					var mon = date.getMonth() + 1;
 					var week = date.getDay();
@@ -206,7 +200,7 @@
 					arr[ 1 ] = str2;
 					return arr;
 				}
-				function unifyTime(date){
+				/*function unifyTime(date){
 					var str;
 					var year=date.getFullYear();
 					var mon = date.getMonth() + 1;
@@ -214,9 +208,9 @@
 					var day = date.getDate();
 					var str =year+"-"+mon +"-"+day;
 					return str;
-				}
+				}*/
 				/*保存数据*/
-				function isSubmit( subCode, subName, subAddr, subPicture ) {
+				function isSubmit( subCode, subName, subAddr, subPicture,subPhone ) {
 					var data = _GETDATA( 'selectdate' );
 					if ( data == undefined || data == null || data == "" ) {
 						mui.alert( '请选择预约日期' );
@@ -225,6 +219,7 @@
 					_SAVEDATA( 'subCode', subCode ); //保存进本地存储
 					_SAVEDATA( 'subName', subName );
 					_SAVEDATA( 'subAddr', subAddr );
+					_SAVEDATA( 'subPhone', subPhone );
 					_SAVEDATA( 'subPicture', subPicture );
 					return true;
 				}

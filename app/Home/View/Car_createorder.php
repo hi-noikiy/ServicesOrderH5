@@ -34,45 +34,43 @@
 		label span {
 			color: #D32F32;
 		}
-		.btn-location{
-			text-align:center ;
+		
+		.btn-location {
+			text-align: center;
 			margin-bottom: 40px;
 		}
 	</style>
 </head>
 
 <body>
-	<div class="mui-content">
+<a href="/index.php/home/car/selectproduct.html" onClick="return isSubmit();" style="color: #FFFFFF;position: fixed;z-index: 10;line-height: 50px;text-align: center;width: 100%;bottom: 0px;left: 0px;background-color: #CE0104;">查看保养方案</a>
+	<div class="mui-content" style="padding-bottom: 50px;">
 		<div class="title">
 			门店信息
 		</div>
 		<ul class="mui-table-view">
-			<li class="mui-table-view-cell">湖北中法汽车服务有限公司</li>
+			<li class="mui-table-view-cell"><span id="subName">加载中...</span></li>
 			<li class="mui-table-view-cell">
 				<p>
 					<span class="mui-icon mui-icon-location-filled"></span>
 					<span>门店地址：</span>
-					<span>武汉市洪山区大学园路7号</span>
+					<span id="subAddr">加载中...</span>
 				</p>
 				<p>
 					<span class="mui-icon mui-icon-phone"></span>
 					<span>电话：</span>
-					<span>027-8895222</span>
+					<span id="subPhone">加载中...</span>
 				</p>
 				<p>
 					<span class="mui-icon-extra mui-icon-extra-outline"></span>
 					<span>预约时间：</span>
-					<span>2017-04-25</span>
-					<span>08:30</span>
+					<span id="selectdate">加载中...</span>
+					<span id="startTime">加载中...</span>
 				</p>
 			</li>
 		</ul>
 		<div class="title">
-			订单编号：<span>000000344</span>
-			<button type="button" class="mui-btn mui-btn-danger">
-				修改订单
-			</button>
-		
+			保养项目
 		</div>
 		<ul class="mui-table-view">
 			<li class="mui-table-view-cell mui-media">
@@ -87,6 +85,7 @@
 					</div>
         		</a>
 			
+
 			</li>
 			<li class="mui-table-view-cell mui-media">
 				<a href="javascript:;">
@@ -100,6 +99,7 @@
 					</div>
         		</a>
 			
+
 			</li>
 			<li class="mui-table-view-cell mui-media">
 				<a href="javascript:;">
@@ -112,6 +112,7 @@
 						</div>
 					</div>
         		</a>
+			
 			</li>
 		</ul>
 		<div class="title total-price">
@@ -131,13 +132,17 @@
 				<input type="text" class="mui-input-clear" placeholder="请输入本人手机号">
 			</div>
 		</form>
-		
-		<div class="mui-row">
-			<div class="mui-col-sm-12 mui-col-xs-12 btn-location">
-				<button type="button" class="mui-btn mui-btn-danger"> 确定</button>
-			</div>
-		</div>
+	</div>
 		<include file="./app/Home/View/Include_foot.php"/>
+		<script>
+		var data = _GETDATA( 'subName' );
+		if ( data != undefined && data != null && data != "" ) {
+			jQuery( '#subName' ).text( data );
+			jQuery( '#subAddr' ).text( _GETDATA( 'subAddr' ) );
+			jQuery( '#subPhone' ).text( _GETDATA( 'subPhone' ) );
+			jQuery( '#selectdate' ).text( _GETDATA( 'selectdate' ) );
+			jQuery( '#startTime' ).text( _GETDATA( 'startTime' )+' - '+ _GETDATA( 'endTime' ) );
+		}
+		</script>
 </body>
-
 </html>

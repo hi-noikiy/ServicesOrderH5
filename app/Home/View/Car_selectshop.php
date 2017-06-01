@@ -106,17 +106,19 @@
 					nextdate = new Date();
 					nextdate.setDate( nextdate.getDate() + 1 );
 				}
+				var para=4;
 				var num=0;
-					if(checkedEndTime(nextdate)){num=4};
-					printtimeOn( nextdate,num);
+					if(checkedEndTime(nextdate)!==false){num=4;para=checkedEndTime(nextdate)};
+					printtimeOn( nextdate,num,para);
 				})
 			
-				 /*验证是否为 最后一天*/
+				 /*验证是否为 最后4天*/
 				function checkedEndTime(nextdate){
 					var endtime=new Date( <?php echo date('Y',time()+2592000); ?>, <?php echo date('m',time()+2592000); ?> - 1, <?php echo date('d',time()+2592000); ?> + 1 );
 					var currenttime=new Date(nextdate);
-					if(currenttime.getTime()>=endtime.getTime()){
-						return true;
+					var para=(endtime.getTime()-currenttime.getTime())/86400000;
+					if(para<5){
+						return para;
 					};
 					return false;
 				}
@@ -136,19 +138,19 @@
 						var olddate = obj.text;
 						var date = new Date( olddate+" "+"00:00:00" );
 						_SAVEDATA( 'selectdate',date);
-						var num=0;
-						if(checkedEndTime(date)){num=4};
-						printtimeOn( date,num)
+						var num=0;var para=4;
+						if(checkedEndTime(date)!==false){num=4;para=checkedEndTime(date)};
+						printtimeOn( date,num,para);
 
 					})
 				}
 				/*时间打印到页面*/
-				function printtimeOn(date,num) {
+				function printtimeOn(date,num,para) {
 					var date=new Date(date);
-					date.setDate(date.getDate()-num);
+					date.setDate(date.getDate()-(4-para));
 					var md = document.querySelectorAll( ".md" );
 					var timeBox=document.querySelectorAll(".time-box");
-						$(timeBox[num]).addClass("selected-time");
+						$(timeBox[4-para]).addClass("selected-time");
 					var week = document.querySelectorAll( ".week" );
 					md[ 0 ].innerHTML = customdate( date )[ 0 ];
 					md[ 0 ].nextSibling.value=date;

@@ -33,7 +33,7 @@
 
 <body>
 	<div class="mui-content">
-		<div class="mui-row">
+		<div class="mui-row" id="time-bar">
 			<div class="mui-col-xs-2 time-box">
 				<span class="md"></span>
 				<input type="hidden">
@@ -88,7 +88,7 @@
 			<script>
 				
 				/*$(".time-box").click(function () {*/
-				mui(document.body).on('tap', '.time-box', function(e) {
+				mui("#time-bar").on('tap', '.time-box', function(e) {
 					var selectedTime = $(".selected-time");
 					if ( selectedTime ) {
 						selectedTime.removeClass( "selected-time" );
@@ -125,7 +125,7 @@
 					};
 					return false;
 				}
-				mui(document.body).on('tap', '#select-time', function(e) {
+				mui("#time-bar").on('tap', '#select-time', function(e) {
 					selecttime();
 				});
 				//document.getElementById( "select-time" ).onclick = selecttime;

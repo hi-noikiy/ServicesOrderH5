@@ -123,7 +123,7 @@ class CarController extends CommonController {
 	public function createorderAction(){
 		if(IS_POST){
 			$json['status']= 1;
-			if(I('post.subTimeID')!='' && I('post.subCode')!='' && I('post.orderPersonName')!='' && I('post.orderVin')!='' && I('post.orderPhone')!='' && I('post.productList')!=''){
+			if(I('post.subTimeID')!='' && I('post.subCode')!='' && I('post.orderPersonName')!='' && I('post.orderVin')!='' && I('post.orderPhone')!='' && I('post.productList')!='' && $_COOKIE['alipay_user_id'] != ''){
 				$this->apipostdata['subTimeID'] = I('post.subTimeID');
 				$this->apipostdata['subCode'] = I('post.subCode');
 				$this->apipostdata['reserveTime'] = I('post.reserveTime');
@@ -134,6 +134,7 @@ class CarController extends CommonController {
 				$this->apipostdata['BuyCarDate'] = I('post.BuyCarDate');
 				$this->apipostdata['CarKM'] = I('post.CarKM');
 				$this->apipostdata['ReserveTime'] = I('post.ReserveTime');
+				$this->apipostdata['aliPayUserID'] = $_COOKIE['alipay_user_id'];
 				$this->apipostdata['productList'] = json_decode($_POST['productList'],true);
 				//$this->apipostdata['productList'] = json_decode(I('post.productList'),true);
 				$data = json_encode($this->apipostdata);
@@ -155,6 +156,8 @@ class CarController extends CommonController {
 			echo json_encode($json);
 			exit;
 		}
+		
+		
 		$assign['title']='确认订单';
 		$this->assign('assign',$assign);
 		$this->display();
@@ -179,5 +182,8 @@ class CarController extends CommonController {
 		$assign['title']='确认订单';
 		$this->assign('assign',$assign);
 		$this->display();
+	}
+	public function alipayredirectAction(){
+		
 	}
 }

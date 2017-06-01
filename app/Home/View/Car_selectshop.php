@@ -87,15 +87,15 @@
 			<script src="__PUBLIC__/assets/js/mui.picker.min.js"></script>
 			<script>
 				
-				$( ".time-box" ).click( function () {
-					var selectedTime = $( ".selected-time" );
+				$(".time-box").click(function () {
+					var selectedTime = $(".selected-time");
 					if ( selectedTime ) {
 						selectedTime.removeClass( "selected-time" );
 					}
 					$( this ).addClass( "selected-time" );
 					var date= $( this ).find( "input" ).val();
-					console.log($( this ).find( "input").val())
-					_SAVEDATA('selectdate',date);
+					/*console.log($( this ).find( "input").val())*/
+					saveTime(date);
 				});
 				//页面加载完执行
 				$(function(){
@@ -105,20 +105,22 @@
 				}else{
 					nextdate = new Date();
 					nextdate.setDate( nextdate.getDate() + 1 );
+					saveTime(nextdate);
 				}
-				var para=4;
-				var num=0;
-					if(checkedEndTime(nextdate)!==false){num=4;para=checkedEndTime(nextdate)};
-					printtimeOn( nextdate,num,para);
+				var para=0;
+					if(checkedEndTime(nextdate)!==false){para=checkedEndTime(nextdate)};
+					printtimeOn( nextdate,para);
 				})
 			
 				 /*验证是否为 最后4天*/
 				function checkedEndTime(nextdate){
 					var endtime=new Date( <?php echo date('Y',time()+2592000); ?>, <?php echo date('m',time()+2592000); ?> - 1, <?php echo date('d',time()+2592000); ?> + 1 );
-					var currenttime=new Date(nextdate);
+					endtime=new Date(format(endtime)+" "+"00:00:00");
+					var currenttime=new Date(format(nextdate)+" "+"00:00:00");
 					var para=(endtime.getTime()-currenttime.getTime())/86400000;
+					
 					if(para<5){
-						return para;
+						return 4-para;
 					};
 					return false;
 				}
@@ -128,39 +130,38 @@
 						type: "date", //设置日历初始视图模式 
 						beginDate: new Date( <?php echo date('Y',time()); ?>, <?php echo date('m',time()); ?> - 1, <?php echo date('d',time()); ?> + 1 ), //设置开始日期 
 						endDate: new Date( <?php echo date('Y',time()+2592000); ?>, <?php echo date('m',time()+2592000); ?> - 1, <?php echo date('d',time()+2592000); ?> + 1 ) //设置结束日期 
-					} );
+					});
 					
 					dtpicker.show( function ( obj ) {
 						var selectedTime = $( ".selected-time" );
 						if ( selectedTime ) {
 							selectedTime.removeClass( "selected-time" );
 						}
-						var olddate = obj.text;
-						var date = new Date( olddate+" "+"00:00:00" );
-						_SAVEDATA( 'selectdate',date);
-						var num=0;var para=4;
-						if(checkedEndTime(date)!==false){num=4;para=checkedEndTime(date)};
-						printtimeOn( date,num,para);
+						var date = obj.text;
+						saveTime(date);
+						var para=0;
+						if(checkedEndTime(date)!==false){para=checkedEndTime(date)};
+						printtimeOn( date,para);
 
 					})
 				}
 				/*时间打印到页面*/
-				function printtimeOn(date,num,para) {
+				function printtimeOn(date,para) {
 					var date=new Date(date);
-					date.setDate(date.getDate()-(4-para));
+					date.setDate(date.getDate()-para);
 					var md = document.querySelectorAll( ".md" );
 					var timeBox=document.querySelectorAll(".time-box");
-						$(timeBox[4-para]).addClass("selected-time");
+						$(timeBox[para]).addClass("selected-time");
 					var week = document.querySelectorAll( ".week" );
 					md[ 0 ].innerHTML = customdate( date )[ 0 ];
-					md[ 0 ].nextSibling.value=date;
+					/*md[ 0 ].nextSibling.value=date;*/
 					jQuery('.time-box input').eq(0).val(date);
 					week[ 0 ].innerHTML = customdate( date )[ 1 ];
 					for ( var i = 1; i < 5; i++ ) {
 						date.setDate( date.getDate() + 1 );
 						md[ i ].innerHTML = customdate( date )[ 0 ];
 						jQuery('.time-box input').eq(i).val(date);
-						md[ i ].nextSibling.value=date;
+						/*md[ i ].nextSibling.value=date;*/
 						week[ i ].innerHTML = customdate( date )[ 1 ];
 					}
 				}
@@ -200,15 +201,18 @@
 					arr[ 1 ] = str2;
 					return arr;
 				}
-				/*function unifyTime(date){
+				function saveTime(date){
+					_SAVEDATA('selectdate',format(date));
+				}
+				function format(date){
+					var date=new Date(date);
 					var str;
 					var year=date.getFullYear();
 					var mon = date.getMonth() + 1;
-					var week = date.getDay();
 					var day = date.getDate();
-					var str =year+"-"+mon +"-"+day;
+					var str =year+"-"+(mon = mon < 10 ? "0" + mon : mon)+"-"+day;
 					return str;
-				}*/
+				}
 				/*保存数据*/
 				function isSubmit( subCode, subName, subAddr, subPicture,subPhone ) {
 					var data = _GETDATA( 'selectdate' );

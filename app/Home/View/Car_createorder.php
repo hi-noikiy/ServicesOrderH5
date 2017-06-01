@@ -165,7 +165,7 @@
 				success: function(msg){
 					if(msg.status=='1'){
 						
-							mui.alert(msg.info.message);
+							//mui.alert(msg.info.message);
 						if(msg.info.data == ''){
 							mui.alert(msg.info.message);
 						}else{
@@ -181,7 +181,7 @@
 					}
 				},
 				complete:function(){
-					//mui('#submitbtn').button('reset');
+					mui('#submitbtn').button('reset');
 				}
 			});
 			return false;

@@ -163,6 +163,31 @@ class CarController extends CommonController {
 		$this->display();
 	}
 	public function verifyorderAction(){
+		if(IS_POST){
+			$json['status']= 1;
+			if(I('post.orderNo')!='' && I('post.orderType')!=''){
+				$this->apipostdata['orderNo'] = I('post.orderNo');
+				$this->apipostdata['orderType'] = I('post.orderType');
+				$this->apipostdata['aliPayUserID'] =$_COOKIE['alipay_user_id'];
+				$data = json_encode($this->apipostdata);
+				$RE = sendData(C('API_SERVER').'UpdateOrderStatus',$data,'POST',array('Content-Type: application/json'));
+				
+				if((int)$RE['code']==200){
+					$json['info'] = json_decode($RE['data'],true);
+					//$list = $info['data'];
+		/*			print_r($list);
+					exit;*/
+					//$this->assign('list',$list);
+				}else{
+					$json['status']= -1;//与服务器通讯失败
+					$json['code']= $RE['code'];
+				}
+			}else{
+				$json['status']= -2;//提交信息不合法
+			}
+			echo json_encode($json);
+			exit;
+		}
 		$orderno = I('get.orderno');
 		if($orderno==""){
 			set404();

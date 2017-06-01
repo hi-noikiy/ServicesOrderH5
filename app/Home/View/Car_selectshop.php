@@ -79,8 +79,12 @@
 				</li>
 				<?php
 				}
-				}
+			}else{
 				?>
+				获取数据失败，请<a href="javascript:void(0);" onClick="javascript:location.reload()">点击这里</a>重试。
+				<?php
+			}
+			?>
 				</ul>
 			</div>
 			<include file="./app/Home/View/Include_foot.php"/>

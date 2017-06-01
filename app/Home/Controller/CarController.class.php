@@ -131,6 +131,9 @@ class CarController extends CommonController {
 				$this->apipostdata['orderVin'] = I('post.orderVin');
 				$this->apipostdata['orderPhone'] = I('post.orderPhone');
 				$this->apipostdata['CarModelCode'] = I('post.CarModelCode');
+				$this->apipostdata['BuyCarDate'] = I('post.BuyCarDate');
+				$this->apipostdata['CarKM'] = I('post.CarKM');
+				$this->apipostdata['ReserveTime'] = I('post.ReserveTime');
 				$this->apipostdata['productList'] = json_decode($_POST['productList'],true);
 				//$this->apipostdata['productList'] = json_decode(I('post.productList'),true);
 				$data = json_encode($this->apipostdata);

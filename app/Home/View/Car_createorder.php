@@ -43,7 +43,7 @@
 </head>
 
 <body>
-<a href="#" onClick="return isSubmit();" style="color: #FFFFFF;position: fixed;z-index: 10;line-height: 50px;text-align: center;width: 100%;bottom: 0px;left: 0px;background-color: #CE0104;">确认订单</a>
+<button type="button" class="mui-btn mui-btn-block mui-btn-primary" style=" border: none;border-radius: 0px; color: #FFFFFF;position: fixed;z-index: 10;text-align: center;width: 100%;bottom: 0px;left: 0px;background-color: #CE0104;margin-bottom: 0px;" id="submitbtn">确认订单</button>
 	<div class="mui-content" style="padding-bottom: 80px;">
 		<div class="title">
 			门店信息
@@ -157,7 +157,7 @@
 				type: "POST",
 				url: "<?php echo U('home/car/createorder'); ?>",
 				global:"false",
-				data:"productList="+_GETDATA( 'productList' )+"&CarModelCode="+_GETDATA( 'carModelCode' )+"&subTimeID="+_GETDATA( 'subTimeID' )+"&subCode="+_GETDATA( 'subCode' )+"&orderPersonName="+jQuery('#orderPersonName').val()+"&orderVin="+jQuery('#orderVin').val()+"&orderPhone="+jQuery('#orderPhone').val(),
+				data:"productList="+_GETDATA( 'productList' )+"&ReserveTime="+_GETDATA( 'selectdate' )+"&CarModelCode="+_GETDATA( 'carModelCode' )+"&subTimeID="+_GETDATA( 'subTimeID' )+"&subCode="+_GETDATA( 'subCode' )+"&orderPersonName="+jQuery('#orderPersonName').val()+"&orderVin="+jQuery('#orderVin').val()+"&BuyCarDate="+_GETDATA( 'buydate' )+"&CarKM="+_GETDATA( 'licheng' )+"&orderPhone="+jQuery('#orderPhone').val(),
 				dataType:"json",
 				error:function(){
 					return false;
@@ -169,7 +169,9 @@
 						if(msg.info.data == ''){
 							mui.alert(msg.info.message);
 						}else{
-							mui.alert('您的订单已提交成功');
+							mui.alert('您的订单已提交成功', '提示', function() {
+								window.location.href="__APP__/";
+							});
 						}
 					}else if(msg.status=='-1'){
 						mui.alert('与服务器通讯出错');
@@ -179,10 +181,18 @@
 					}
 				},
 				complete:function(){
+					//mui('#submitbtn').button('reset');
 				}
 			});
 			return false;
 		}
+		mui(document.body).on('tap', '#submitbtn', function(e) {
+			isSubmit();
+            mui('#submitbtn').button('loading');
+           /* setTimeout(function() {
+                mui(this).button('reset');
+            }.bind(this), 2000);*/
+        });
 		</script>
 </body>
 </html>

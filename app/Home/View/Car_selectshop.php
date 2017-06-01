@@ -70,14 +70,12 @@
 					?>
 			<li class="mui-table-view-cell mui-media">
 				<a href="<?php echo U('home/car/selectorder?subcode='.$v['subCode']); ?>" class="mui-navigate-right" onClick="return isSubmit('{$v['subCode']}','{$v['subName']}','{$v['subAddr']}','{$v['subPicture']}','{$v['subPhone']}');">
-						<img class="mui-media-object mui-pull-left" src="<?php if($v['subPicture']==''){ ?>__PUBLIC__/assets/images/none-shop.jpg<?php }else{ ?><?php echo C('IMG_URL'); ?>{$v['subPicture']}<?php } ?>">
+						<img class="mui-media-object mui-pull-left" src="<?php if($v['subPicture']==''){ ?>__PUBLIC__/assets/images/none-shop.jpg<?php }else{ ?>{$v['subPicture']}<?php } ?>">
 						<div class="mui-media-body">
 							{$v['subName']}
 							<p class='mui-ellipsis'>{$v['subAddr']}</p>
 						</div>
 					</a>
-			
-
 				</li>
 				<?php
 				}

@@ -49,29 +49,29 @@
 			<div class="mui-col-xs-10" style="padding-left: 10px;">预约日期：<span id="selectdateshow">2017年6月23日</span></div>
 		</div>-->
 		<div class="mui-row selected-time">
-			<div class="mui-col-xs-2 time-box">
-				<span >03-25</span>
-				<div>（周二）</div>
-			</div>
 			<div class="mui-col-xs-2 selected">
-				<span >03-25</span>
-				<div>（周二）</div>
+				<span class="md">03-25</span>
+				<div class="week">（周二）</div>
 			</div>
-			<div class="mui-col-xs-2 time-box">
-				<span >03-25</span>
-				<div>（周二）</div>
+			<div class="mui-col-xs-2">
+				<span class="md">03-25</span>
+				<div class="week">（周二）</div>
 			</div>
-			<div class="mui-col-xs-2 time-box">
-				<span >03-25</span>
-				<div>（周二）</div>
+			<div class="mui-col-xs-2 ">
+				<span class="md">03-25</span>
+				<div class="week">（周二）</div>
 			</div>
-			<div class="mui-col-xs-2 time-box">
-				<span >03-25</span>
-				<div>（周二）</div>
+			<div class="mui-col-xs-2">
+				<span class="md">03-25</span>
+				<div class="week">（周二）</div>
 			</div>
-			<div class="mui-col-xs-2 time-box">
-				<span >03-25</span>
-				<div>（周二）</div>
+			<div class="mui-col-xs-2 ">
+				<span class="md">03-25</span>
+				<div class="week">（周二）</div>
+			</div>
+			<div class="mui-col-xs-2 ">
+				<span class="md">03-25</span>
+				<div class="week">（周二）</div>
 			</div>
 		</div>
 		<ul class="mui-table-view">
@@ -115,6 +115,59 @@
 			_SAVEDATA( 'endTime', endTime );
 			_SAVEDATA( 'floatPrice', floatPrice );
 			return true;
+		}
+		console.log(_GETDATA( 'selectdate' ))
+		printtimeOn(_GETDATA( 'selectdate' ), 0)
+		
+		function printtimeOn(date, num) {
+			var date = new Date(date);
+			date.setDate(date.getDate() - num);
+			var md = document.querySelectorAll(".md");
+			var timeBox = document.querySelectorAll(".time-box");
+			$(timeBox[num]).addClass("selected-time");
+			var week = document.querySelectorAll(".week");
+			md[0].innerHTML = customdate(date)[0];
+			week[0].innerHTML = customdate(date)[1];
+			for (var i = 1; i < 6; i++) {
+				date.setDate(date.getDate() + 1);
+				md[i].innerHTML = customdate(date)[0];
+				week[i].innerHTML = customdate(date)[1];
+			}
+		}
+		function customdate(date) {
+			var date = new Date(date);
+			var arr = [];
+			var mon = date.getMonth() + 1;
+			var week = date.getDay();
+			var day = date.getDate();
+			var str1 = (mon = mon < 10 ? "0" + mon : mon) + "-" + day;
+			var str2 = "";
+			switch (week) {
+				case 0:
+					str2 = "(周日)"
+					break;
+				case 1:
+					str2 = "(周一)"
+					break;
+				case 2:
+					str2 = "(周二)"
+					break;
+				case 3:
+					str2 = "(周三)"
+					break;
+				case 4:
+					str2 = "(周四)"
+					break;
+				case 5:
+					str2 = "(周五)"
+					break;
+				case 6:
+					str2 = "(周六)"
+					break;
+			}
+			arr[0] = str1;
+			arr[1] = str2;
+			return arr;
 		}
 	</script>
 </body>

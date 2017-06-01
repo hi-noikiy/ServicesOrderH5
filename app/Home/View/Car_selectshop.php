@@ -59,7 +59,7 @@
 				<input type="hidden">
 				<div class="week"></div>
 			</div>
-			<div class="mui-col-xs-2" id="select-time" style="font-size: 10px;line-height: 15px">
+			<div class="mui-col-xs-2" id="select-time" style="font-size: 12px;line-height: 15px;margin-top:5px; ">
 				选择<br>时间
 			</div>
 		</div>
@@ -70,7 +70,7 @@
 					?>
 			<li class="mui-table-view-cell mui-media">
 				<a href="<?php echo U('home/car/selectorder?subcode='.$v['subCode']); ?>" class="mui-navigate-right" onClick="return isSubmit('{$v['subCode']}','{$v['subName']}','{$v['subAddr']}','{$v['subPicture']}','{$v['subPhone']}');">
-						<img class="mui-media-object mui-pull-left" src="<?php if($v['subPicture']==''){ ?>__PUBLIC__/assets/images/none-shop.jpg<?php }else{ ?>{$v['subPicture']}<?php } ?>">
+						<img class="mui-media-object mui-pull-left" src="<?php if($v['subPicture']==''){ ?>__PUBLIC__/assets/images/none-shop.jpg<?php }else{ ?><?php echo C('IMG_URL'); ?>{$v['subPicture']}<?php } ?>">
 						<div class="mui-media-body">
 							{$v['subName']}
 							<p class='mui-ellipsis'>{$v['subAddr']}</p>
@@ -172,7 +172,7 @@
 					var mon = date.getMonth() + 1;
 					var week = date.getDay();
 					var day = date.getDate();
-					var str1 = ( mon = mon < 10 ? "0" + mon : mon ) + "-" + day;
+					var str1 = ( mon = mon < 10 ? "0" + mon : mon ) + "-" + (day = day < 10 ? "0" + day : day);
 					var str2="";
 					switch ( week ){
 						case 0:
@@ -210,7 +210,7 @@
 					var year=date.getFullYear();
 					var mon = date.getMonth() + 1;
 					var day = date.getDate();
-					var str =year+"-"+(mon = mon < 10 ? "0" + mon : mon)+"-"+day;
+					var str =year+"-"+(mon = mon < 10 ? "0" + mon : mon)+"-"+(day = day < 10 ? "0" + day : day);
 					return str;
 				}
 				/*保存数据*/

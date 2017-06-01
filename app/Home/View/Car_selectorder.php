@@ -106,7 +106,7 @@
 			jQuery( '#subName' ).text( _GETDATA( 'subName' ) );
 			jQuery( '#subAddr' ).text( _GETDATA( 'subAddr' ) );
 			if ( _GETDATA( 'subPicture' ) != '' ) {
-				jQuery( '#subPicture' ).text( "<?php echo C('IMG_URL'); ?>"+_GETDATA( 'subPicture' ) );
+				jQuery( '#subPicture' ).attr( "src","<?php echo C('IMG_URL'); ?>"+_GETDATA( 'subPicture' ) );
 			}
 		}
 		function isSubmit( subTimeID, startTime, endTime, floatPrice ) {
@@ -140,7 +140,7 @@
 			var mon = date.getMonth() + 1;
 			var week = date.getDay();
 			var day = date.getDate();
-			var str1 = (mon = mon < 10 ? "0" + mon : mon) + "-" + day;
+			var str1 = (mon = mon < 10 ? "0" + mon : mon) + "-" + (day = day < 10 ? "0" + day : day);
 			var str2 = "";
 			switch (week) {
 				case 0:

@@ -87,7 +87,8 @@
 			<script src="__PUBLIC__/assets/js/mui.picker.min.js"></script>
 			<script>
 				
-				$(".time-box").click(function () {
+				/*$(".time-box").click(function () {*/
+				mui(document.body).on('tap', '.time-box', function(e) {
 					var selectedTime = $(".selected-time");
 					if ( selectedTime ) {
 						selectedTime.removeClass( "selected-time" );
@@ -124,7 +125,10 @@
 					};
 					return false;
 				}
-				document.getElementById( "select-time" ).onclick = selecttime;
+				mui(document.body).on('tap', '#select-time', function(e) {
+					selecttime();
+				});
+				//document.getElementById( "select-time" ).onclick = selecttime;
 				function selecttime() {
 					var dtpicker = new mui.DtPicker( {
 						type: "date", //设置日历初始视图模式 

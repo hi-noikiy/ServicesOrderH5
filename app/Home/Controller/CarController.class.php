@@ -208,7 +208,9 @@ class CarController extends CommonController {
 		$this->assign('assign',$assign);
 		$this->display();
 	}
-	public function alipayredirectAction(){
-		
+	public function orderlistAction(){
+		$assign['title']='我的订单';
+		$this->assign('assign',$assign);
+		$this->display();
 	}
 }

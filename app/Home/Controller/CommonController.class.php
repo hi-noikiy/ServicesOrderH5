@@ -29,7 +29,7 @@ class CommonController extends Controller {
 					$this->error('与服务器连接失败，请稍后再试。');
 				}
 			}else{
-				redirect('https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017042807041383&scope=auth_base&redirect_uri='.ReHome());
+				redirect('https://openauth.alipay.com/oauth2/publicAppAuthorize.htm?app_id=2017042807041383&scope=auth_base&redirect_uri='.GetCurUrl());
 				exit();
 			}
 		}

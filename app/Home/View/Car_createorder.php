@@ -170,7 +170,7 @@
 							mui.alert(msg.info.message);
 						}else{
 							mui.alert('您的订单已提交成功', '提示', function() {
-								window.location.href="__APP__/";
+								window.location.href="<?php echo U('home/car/orderlist'); ?>";
 							});
 						}
 					}else if(msg.status=='-1'){

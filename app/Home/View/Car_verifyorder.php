@@ -80,7 +80,7 @@
 			 合计：<span>￥{$info['totalPrice']}</span>
 		</div>
 		</div>
-		<div class="receipt-money mui-row" id="but-bar">
+		<div class="receipt-money mui-row" id="but-bar"<?php if((int)$info['orderStatus']!=0){ ?> style="display: none"<?php } ?>>
 			<div class="mui-col-xs-6">
 			<button class="mui-btn mui-btn-block" onClick="goit(1)">
 				支付宝收款
@@ -107,7 +107,8 @@
 				success: function(msg){
 					if(msg.status=='1'){
 						
-							//mui.alert(msg.info.message);
+						//alert(msg.info.code);
+						//return;
 						if(msg.info.data == ''){
 							mui.alert(msg.info.message);
 						}else{

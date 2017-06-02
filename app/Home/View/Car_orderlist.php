@@ -14,26 +14,26 @@
 			font-size: 16px;
 			color: #D32F32;
 		}
+		
 	</style>
 </head>
 
 <body>
 	<div class="mui-content">
+<?php
+if ( $info ) {
+	foreach ( $info as $rs ) {
+?>
 		<div class="mui-card">
-			<div class="mui-card-header mui-row">
-				<p class="mui-col-xs-7">
-					订单编号：<span >12qewrte3456</span>
-				</p>
-				<p class="mui-col-xs-5">
-					<span class="mui-pull-right">2017-05-03</span>
-				</p>
+			<div class="mui-card-header" style="display: block">订单编号：{$rs['orderNo']}<br>
+			<span style="font-size: 10px;color: #CCCCCC;">下单时间：{$rs['commitTime']}</span>
 			</div>
 			<div class="mui-card-content">
-				<div class="mui-card-content-inner">
+
 					<ul class="mui-table-view">
 						<?php
-						if ( $info[ 'productList' ] ) {
-							foreach ( $info[ 'productList' ] as $v ) {
+						if ( $rs[ 'productList' ] ) {
+							foreach ( $rs[ 'productList' ] as $v ) {
 								?>
 						<li class="mui-table-view-cell mui-media">
 							<img class="mui-media-object mui-pull-left" src="<?php if($v['imgSrc']==''){ ?>__PUBLIC__/assets/images/none-car.jpg<?php }else{ ?><?php echo C('IMG_URL'); ?>{$v['imgSrc']}<?php } ?>">
@@ -51,19 +51,41 @@
 						}
 						?>
 					</ul>
-					<div class="title total-price">
-			 			共<span>4</span>件商品， 合计：<span>￥{$info['totalPrice']}</span>
+					<div class="title total-price" style="border-top:solid 1px #E3E3E5; padding-top: 10px;">
+				<span style="font-size: 14px;color: #666666;">预约时间：{$rs['reserveTime']}</span><br>
+			 			共<span>{$rs['productNum']}</span>件商品， 合计：<span>￥{$rs['totalPrice']}</span>
 					</div>
-				</div>
 			</div>
-			<div class="mui-card-footer">
-				<button class="mui-btn" style="background:#D10024;color:#fff;border: none;margin-left:65%;">
+			<div class="mui-card-footer" style="text-align: right;display: block">
+				<button class="mui-btn" style="background:#D10024;color:#fff;border: none;" myorderno="{$rs['orderNo']}">
 				出示二维码
 				</button>
 			</div>
 		</div>
+<?php
+	}
+}else{
+?>
+<div style="text-align: center">您还没有任何订单。</div>
+<?php
+}
+?>
 	</div>
 	<include file="./app/Home/View/Include_foot.php"/>
+	<script src="__PUBLIC__/assets/js/jquery.qrcode.min.js"></script>
+	<script>
+	jQuery('[myorderno]').click(function(){
+		var orderno = jQuery(this).attr('myorderno');
+		mui.alert('<div id="qrcode"></div>', '二维码', function() {
+		});
+		jQuery("#qrcode").qrcode({
+			width: 800, //宽度 
+			height:800, //高度 
+			text: "<?php echo ReHome(); ?>__APP__/home/car/verifyorder/orderno/"+orderno //任意内容 
+		}); 
+		jQuery("#qrcode canvas").width('100%').height('auto');
+	});
+	</script>
 </body>
 
 </html>

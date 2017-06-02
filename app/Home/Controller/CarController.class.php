@@ -209,6 +209,18 @@ class CarController extends CommonController {
 		$this->display();
 	}
 	public function orderlistAction(){
+		$this->apipostdata['aliPayUserID'] = $_COOKIE['alipay_user_id'];;
+		$data = json_encode($this->apipostdata);
+		$RE = sendData(C('API_SERVER').'GetOrderInfoList',$data,'POST',array('Content-Type: application/json'));
+		if((int)$RE['code']==200){
+			$info = json_decode($RE['data'],true);
+			$info = $info['data'];
+			/*print_r($info);
+			exit;*/
+			$this->assign('info',$info);
+		}else{
+			$this->error('与服务器连接失败，请稍后再试。');
+		}
 		$assign['title']='我的订单';
 		$this->assign('assign',$assign);
 		$this->display();

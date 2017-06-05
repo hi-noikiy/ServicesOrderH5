@@ -66,7 +66,7 @@ if ( $info ) {
 	}
 }else{
 ?>
-<div style="text-align: center">您还没有任何订单。</div>
+<div style="text-align: center;padding: 30px;">您还没有任何订单。</div>
 <?php
 }
 ?>

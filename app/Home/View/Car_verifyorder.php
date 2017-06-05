@@ -82,7 +82,7 @@
 		</div>
 		<div class="receipt-money mui-row" id="but-bar"<?php if((int)$info['orderStatus']!=0){ ?> style="display: none"<?php } ?>>
 			<div class="mui-col-xs-6">
-			<button class="mui-btn mui-btn-block" onClick="goit(1)">
+			<button class="mui-btn mui-btn-block" onClick="showqr()">
 				支付宝收款
 			</button>
 			</div>
@@ -94,39 +94,55 @@
 		</div>
 		<include file="./app/Home/View/Include_foot.php"/>
 	<script>
-		function goit(type){
-			jQuery.ajax({
-				type: "POST",
-				url: "<?php echo U('home/car/verifyorder'); ?>",
-				global:"false",
-				data:"orderNo={$info['orderNo']}&orderType="+type,
-				dataType:"json",
-				error:function(){
-					return false;
-				},
-				success: function(msg){
-					if(msg.status=='1'){
-						
-						//alert(msg.info.code);
-						//return;
-						if(msg.info.data == ''){
-							mui.alert(msg.info.message);
-						}else{
-							mui.alert('订单已经完成', '提示', function() {
-								jQuery('#but-bar').hide();
-							});
-						}
-					}else if(msg.status=='-1'){
-						mui.alert('与服务器通讯出错');
-					}
-					else if(msg.status=='-2'){
-						mui.alert('提交的信息不符合要求');
-					}
-				},
-				complete:function(){
+		function showqr(){
+			mui.confirm('<img src="<?php echo C('IMG_URL'); ?>{$info['subPayQrcode']}" width="100%">', '支付宝支付', ['取消支付','完成支付'], function(e) {
+				if (e.index == 1) {
+					goit(1);
+				}else{
 					mui('#but-bar button').button('reset');
 				}
 			});
+		}
+		function goit(type){
+			mui.confirm('确认对方已经完成支付？', '确认提示', ['取消','确定'], function(e) {
+				if (e.index == 1) {
+					jQuery.ajax({
+						type: "POST",
+						url: "<?php echo U('home/car/verifyorder'); ?>",
+						global:"false",
+						data:"orderNo={$info['orderNo']}&orderType="+type,
+						dataType:"json",
+						error:function(){
+							return false;
+						},
+						success: function(msg){
+							if(msg.status=='1'){
+
+								//alert(msg.info.code);
+								//return;
+								if(msg.info.data == ''){
+									mui.alert(msg.info.message);
+								}else{
+									mui.alert('订单已经完成', '提示', function() {
+										jQuery('#but-bar').hide();
+									});
+								}
+							}else if(msg.status=='-1'){
+								mui.alert('与服务器通讯出错');
+							}
+							else if(msg.status=='-2'){
+								mui.alert('提交的信息不符合要求');
+							}
+						},
+						complete:function(){
+							mui('#but-bar button').button('reset');
+						}
+					});
+				} else {
+					mui('#but-bar button').button('reset');
+				}
+			});
+			
 		}
 		jQuery('#but-bar button').click(function(){
 			mui('#but-bar button').button('loading');

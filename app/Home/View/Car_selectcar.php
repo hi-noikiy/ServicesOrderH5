@@ -26,7 +26,7 @@
 				foreach($info['carSeriesList'] as $v){
 		?>
 			<li class="mui-table-view-cell mui-media mui-col-xs-4">
-	           <a href="<?php echo U('Car/selectcarclass?id='.$v['carSeriesCode']); ?>" onClick="return saveinfo('{$v['carSeriesCode']}','{$v['carSeriesImg']}','{$v['carSeriesName']}')">
+	           <a href="<?php echo U('home/car/selectcarclass?id='.$v['carSeriesCode']); ?>" onClick="return saveinfo('{$v['carSeriesCode']}','{$v['carSeriesImg']}','{$v['carSeriesName']}')">
 		           <img src="<?php if($v['carSeriesImg']==''){ ?>__PUBLIC__/assets/images/none-car.jpg<?php }else{ ?><?php echo C('IMG_URL'); ?>{$v['carSeriesImg']}<?php } ?>" alt="">
 		           <div class="mui-media-body">{$v['carSeriesName']}</div>
 		       </a>

@@ -28,7 +28,7 @@
 				<?php if($v['carModelList']){ ?>
 					<ul class="mui-table-view mui-table-view-chevron">
 					<?php foreach($v['carModelList'] as $rs){ ?>
-						<li class="mui-table-view-cell"><a class="mui-navigate-right" href="<?php echo U('Car/inputinfo?id='.$rs['carModelCode']); ?>" onClick="return saveinfo('{$rs['carModelCode']}','{$rs['carModelName']}')">{$rs['carModelName']}</a></li>
+						<li class="mui-table-view-cell"><a class="mui-navigate-right" href="<?php echo U('home/car/inputinfo?id='.$rs['carModelCode']); ?>" onClick="return saveinfo('{$rs['carModelCode']}','{$rs['carModelName']}')">{$rs['carModelName']}</a></li>
 					<?php } ?>
 					</ul>
 				<?php } ?>

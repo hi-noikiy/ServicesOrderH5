@@ -138,15 +138,21 @@
 		}
 		function isSubmit(){
 			if(jQuery('#orderPersonName').val()==''){
-				mui.alert('请输入您的真实姓名');
+				mui.alert('请输入您的真实姓名', '提示', function() {
+					jQuery('#orderPersonName').focus();
+				});
 				return false;
 			}
 			if(jQuery('#orderVin').val()==''){
-				mui.alert('请输入正确的车架号');
+				mui.alert('请输入正确的车架号', '提示', function() {
+					jQuery('#orderVin').focus();
+				});
 				return false;
 			}
 			if(jQuery('#orderPhone').val()==''){
-				mui.alert('请输入您的手机号');
+				mui.alert('请输入您的手机号', '提示', function() {
+					jQuery('#orderPhone').focus();
+				});
 				return false;
 			}
 			_SAVEDATA('orderPersonName',jQuery('#orderPersonName').val());//保存进本地存储
@@ -170,6 +176,7 @@
 							mui.alert(msg.info.message);
 						}else{
 							mui.alert('您的订单已提交成功', '提示', function() {
+								localStorage.clear();//清空所有本地存储
 								window.location.href="<?php echo U('home/car/orderlist'); ?>";
 							});
 						}

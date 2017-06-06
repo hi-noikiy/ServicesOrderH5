@@ -42,7 +42,7 @@
 				</div>
 			</div>
 			<div class="mui-col-xs-4" style="padding: 10px;">
-				<span id="licheng"></span>万公里<br><span style="font-size: 12px;color: #999999;" id="selectcityname">加载中...</span>
+				<span id="licheng"></span>公里<br><span style="font-size: 12px;color: #999999;" id="selectcityname">加载中...</span>
 			</div>
 		</div>
 		<?php

@@ -39,7 +39,7 @@
 					<label>行驶里程</label>
 					<input id="licheng" type="number" placeholder="请输入公里数" style="text-align:right">
 				</div>
-				<span class="mui-badge mui-badge-inverted">万公里</span>
+				<span class="mui-badge mui-badge-inverted">公里</span>
 			</li>
 			<li class="mui-table-view-cell">
 				<a class="mui-navigate-right" id="selectcity">

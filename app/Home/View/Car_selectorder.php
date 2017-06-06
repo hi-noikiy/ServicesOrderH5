@@ -90,7 +90,7 @@
 				foreach($list as $v){
 		?>
 			<div class=" mui-col-xs-4" style="">{$v['startTime']}-{$v['endTime']}</div>
-			<div class=" mui-col-xs-4" style="text-align: center">￥<span style="color: #FF0000">{$v['floatPrice']}</span></div>
+			<div class=" mui-col-xs-4" style="text-align: center"><!--￥<span style="color: #FF0000">{$v['floatPrice']}</span>--></div>
 			<div class=" mui-col-xs-4" style="text-align: right;"><a href="<?php echo U('home/car/createorder'); ?>" class="mui-btn mui-btn-danger" onClick="return isSubmit('{$v['subTimeID']}','{$v['startTime']}','{$v['endTime']}','{$v['floatPrice']}');">预订</a></div>
 		<?php
 				}

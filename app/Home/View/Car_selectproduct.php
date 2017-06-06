@@ -63,8 +63,16 @@
 			if ( $rs3 ) {
 				foreach ( $rs3 as $rs4 ) {
 					?>
-			<li class="mui-table-view-cell mui-checkbox mui-left mui-media" style="line-height: 42px;">
-				<input id="ckb{$rs4['productID']}" type="checkbox" mydata-id="{$rs4['productID']}" mydata-name="{$rs4['productName']}" mydata-price="{$rs4['salePrice']}" mydata-count="1" mydata-img="{$rs4['imgSrc']}"><img class="mui-media-object mui-pull-left" src="<?php if($rs4['imgSrc']==''){ ?>__PUBLIC__/assets/images/none-shop.jpg<?php }else{ ?><?php echo C('IMG_URL'); ?>{$rs4['imgSrc']}<?php } ?>" width="42" height="42">{$rs4['productName']}<span class="mui-badge mui-badge-danger mui-badge-inverted">￥{$rs4['salePrice']}</span>
+			<li class="mui-table-view-cell mui-checkbox mui-left mui-media">
+			<table cellpadding="0" cellspacing="0" width="100%">
+				<tr>
+				<td style="width: 0px"><input id="ckb{$rs4['productID']}" type="checkbox" mydata-id="{$rs4['productID']}" mydata-name="{$rs4['productName']}" mydata-price="{$rs4['salePrice']}" mydata-count="1" mydata-img="{$rs4['imgSrc']}"></td>
+				<td style="width: 50px"><img class="mui-media-object mui-pull-left" src="<?php if($rs4['imgSrc']==''){ ?>__PUBLIC__/assets/images/none-shop.jpg<?php }else{ ?><?php echo C('IMG_URL'); ?>{$rs4['imgSrc']}<?php } ?>" width="42" height="42"></td>
+				<td style="text-overflow: ellipsis;">{$rs4['productName']}</td>
+				<td style="text-align: right;"><span class="mui-badge mui-badge-danger mui-badge-inverted">￥{$rs4['salePrice']}</span></td>
+				</tr>
+			</table>
+				<!--<input id="ckb{$rs4['productID']}" type="checkbox" mydata-id="{$rs4['productID']}" mydata-name="{$rs4['productName']}" mydata-price="{$rs4['salePrice']}" mydata-count="1" mydata-img="{$rs4['imgSrc']}"><img class="mui-media-object mui-pull-left" src="<?php if($rs4['imgSrc']==''){ ?>__PUBLIC__/assets/images/none-shop.jpg<?php }else{ ?><?php echo C('IMG_URL'); ?>{$rs4['imgSrc']}<?php } ?>" width="42" height="42"><a style="padding: 0px;padding-top: 10px;padding-bottom: 10px;">{$rs4['productName']}</a><span class="mui-badge mui-badge-danger mui-badge-inverted">￥{$rs4['salePrice']}</span>-->
 			</li>
 			<?php
 			}
